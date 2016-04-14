@@ -22,6 +22,13 @@ func registerRoutes() *gin.Engine {
 	})
 
 	employees := r.Group("/employees")
+	employees.GET("/", func(c *gin.Context) {
+		employees := Employees
+		c.HTML(http.StatusOK, "employees.html",
+			map[string]interface{}{
+				"Employees": employees,
+			})
+	})
 	employees.GET("/:id/vacations", func(c *gin.Context) {
 		id := c.Param("id")
 		timesOff, ok := TimesOff[id]

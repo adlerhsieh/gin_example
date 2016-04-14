@@ -1,0 +1,12 @@
+{{template "head"}}
+{{template "nav"}}
+
+<h2>Employees</h2>
+
+{{range .Employees}}
+  <div>
+    <h4>
+      <a href="/employees/{{.ID}}/vacations">{{.FirstName}} {{.LastName}}</a>
+    </h4>
+  </div>
+{{end}}

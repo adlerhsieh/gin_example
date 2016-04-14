@@ -1,0 +1,16 @@
+<h2>TimesOff</h2>
+
+{{range .TimesOff}}
+<div>
+  <p>Type: {{.Type}}</p>
+  <p>StartDate: {{.StartDate.Format "2-Jan"}}</p>
+  <p>Amount: {{.Amount}}</p>
+  <p>Status: {{.Status}}</p>
+  <button
+    {{if eq .Status "Taken"}}
+      disabled
+    {{end}}
+    >Edit</button>
+</div>
+<hr />
+{{end}}

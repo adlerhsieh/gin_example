@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-var employees = map[string]Employee{
+var Employees = map[string]Employee{
 	"962134": Employee{
 		ID:        962134,
 		FirstName: "Jennifer",
@@ -23,7 +23,7 @@ var employees = map[string]Employee{
 	},
 }
 
-var TimeOff = map[string][]TimeOff{
+var TimesOff = map[string][]TimeOff{
 	"962134": []TimeOff{
 		{
 			Type:      "Holiday",
@@ -35,6 +35,12 @@ var TimeOff = map[string][]TimeOff{
 			Type:      "PTO",
 			Amount:    16.,
 			StartDate: time.Date(2016, 8, 16, 0, 0, 0, 0, time.UTC),
+			Status:    "Scheduled",
+		},
+		{
+			Type:      "Holiday",
+			Amount:    16.,
+			StartDate: time.Date(2016, 7, 10, 0, 0, 0, 0, time.UTC),
 			Status:    "Scheduled",
 		},
 	},

@@ -1,0 +1,12 @@
+{{template "head"}}
+{{template "nav"}}
+
+<h3>Creating New Employees</h3>
+<form action="/admin/employees/create" method="post">
+   <p>ID: <input type="number" name="id" id="" /></p>
+   <p>First Name: <input type="text" name="first_name" id="" /></p>
+   <p>Last Name: <input type="text" name="last_name" id="" /></p>
+   <p>Position: <input type="text" name="position" id="" /></p>
+   <p>StartDate: <input type="date" name="start_date" id="" /></p>
+   <p><input type="submit" value="Create" /></p>
+</form>

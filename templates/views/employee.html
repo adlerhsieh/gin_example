@@ -1,0 +1,15 @@
+{{template "head"}}
+{{template "nav"}}
+
+<h2>{{.Employee.FirstName}} {{.Employee.LastName}}</h2>
+
+<ul>
+  <li>ID: {{.Employee.ID}}</li>
+  <li>Position: {{.Employee.Position}}</li>
+  <li>StartDate: {{.Employee.StartDate}}</li>
+  <li>Status: {{.Employee.Status}}</li>
+</ul>
+
+<p><a href="/employees">Back</a></p>
+<p><a href="/employees/{{.Employee.ID}}/vacations">Vacation Status</a></p>
+

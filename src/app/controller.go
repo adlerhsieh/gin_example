@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
+	"time"
 )
 
 func registerRoutes() *gin.Engine {
@@ -29,7 +31,20 @@ func registerRoutes() *gin.Engine {
 				"Employees": employees,
 			})
 	})
+	employees.GET("/:id", func(c *gin.Context) {
+		Id := c.Param("id")
+		Employee, ok := Employees[Id]
+		if !ok {
+			c.String(http.StatusNotFound, "Record Not Found")
+			return
+		}
+		c.HTML(http.StatusOK, "employee.html",
+			gin.H{
+				"Employee": Employee,
+			})
+	})
 	employees.GET("/:id/vacations", func(c *gin.Context) {
+		// "/add" will be considered an {id: "add"}
 		id := c.Param("id")
 		timesOff, ok := TimesOff[id]
 		if !ok {
@@ -37,7 +52,7 @@ func registerRoutes() *gin.Engine {
 			return
 		}
 		c.HTML(http.StatusOK, "vacation-overview.html",
-			map[string]interface{}{
+			gin.H{
 				"TimesOff": timesOff,
 			})
 	})
@@ -47,6 +62,24 @@ func registerRoutes() *gin.Engine {
 	}))
 	admin.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "admin-overview.html", nil)
+	})
+	admin.GET("/employees/:id", func(c *gin.Context) {
+		if c.Param("id") == "new" {
+			c.HTML(http.StatusOK, "admin-employees-new.html", nil)
+		}
+	})
+	admin.POST("/employees/:id", func(c *gin.Context) {
+		if c.Param("id") == "create" {
+			Id := c.PostForm("id")
+			var emp Employee
+			emp.ID, _ = strconv.Atoi(c.PostForm("id"))
+			emp.FirstName = c.PostForm("first_name")
+			emp.LastName = c.PostForm("last_name")
+			emp.Position = c.PostForm("position")
+			emp.StartDate, _ = time.Parse("2006-01-02", c.PostForm("start_date"))
+			Employees[Id] = emp
+			c.Redirect(http.StatusMovedPermanently, "/employees/"+Id)
+		}
 	})
 
 	// 1st arg: routes

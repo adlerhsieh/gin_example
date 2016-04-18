@@ -61,7 +61,7 @@ var TimesOff = map[string][]TimeOff{
 }
 
 type Employee struct {
-	ID        uint
+	ID        int
 	FirstName string
 	LastName  string
 	StartDate time.Time

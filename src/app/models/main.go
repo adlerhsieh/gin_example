@@ -62,10 +62,10 @@ var TimesOff = map[string][]TimeOff{
 
 type Employee struct {
 	ID        int
-	FirstName string
-	LastName  string
+	FirstName string `form:"first_name"`
+	LastName  string `form:"last_name"`
 	StartDate time.Time
-	Position  string
+	Position  string `form:"position"`
 	TotalPTO  float32
 	Status    string
 	TimesOff  []TimeOff

@@ -22,15 +22,26 @@ func registerAdmin(r *gin.Engine) {
 	})
 	admin.POST("/employees/:id", func(c *gin.Context) {
 		if c.Param("id") == "create" {
-			Id := c.PostForm("id")
-			var emp models.Employee
-			emp.ID, _ = strconv.Atoi(c.PostForm("id"))
-			emp.FirstName = c.PostForm("first_name")
-			emp.LastName = c.PostForm("last_name")
-			emp.Position = c.PostForm("position")
-			emp.StartDate, _ = time.Parse("2006-01-02", c.PostForm("start_date"))
-			models.Employees[Id] = emp
-			c.Redirect(http.StatusMovedPermanently, "/employees/"+Id)
+			ID := createEmployee(c)
+			if ID == "" {
+				c.String(http.StatusBadRequest, "Failed")
+				return
+			}
+			c.Redirect(http.StatusMovedPermanently, "/employees/"+ID)
 		}
 	})
+}
+
+func createEmployee(c *gin.Context) string {
+	ID := c.PostForm("id")
+	var emp models.Employee
+	err := c.Bind(&emp)
+	if err != nil {
+		return ""
+	}
+	emp.ID, _ = strconv.Atoi(c.PostForm("id"))
+	emp.StartDate, _ = time.Parse("2006-01-02", c.PostForm("start_date"))
+	emp.Status = "Active"
+	models.Employees[ID] = emp
+	return ID
 }

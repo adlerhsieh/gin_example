@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/adlerhsieh/gin_example/src/app/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -37,6 +38,8 @@ func createEmployee(c *gin.Context) string {
 	var emp models.Employee
 	err := c.Bind(&emp)
 	if err != nil {
+		fmt.Println(err)
+		c.String(http.StatusInternalServerError, "Failed")
 		return ""
 	}
 	emp.ID, _ = strconv.Atoi(c.PostForm("id"))

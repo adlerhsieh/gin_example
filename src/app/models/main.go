@@ -72,8 +72,8 @@ type Employee struct {
 }
 
 type TimeOff struct {
-	Type      string
-	Amount    float32
-	StartDate time.Time
-	Status    string
+	Type      string    `json:"type"`
+	Amount    float32   `json:"amount"`
+	StartDate time.Time `json:"start_date"`
+	Status    string    `json:"status"`
 }

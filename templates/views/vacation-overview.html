@@ -3,6 +3,25 @@
 
 <h2>TimesOff</h2>
 
+<h3>Add Vacation</h3>
+<form id="vacation" data-id="{{.ID}}">
+  <p>Type: <select name="type" id="">
+    <option valud="holiday">Holiday</option>
+    <option valud="pto">PTO</option>
+  </select></p>
+  <p>Amount: <input type="number" name="amount" value="10" /></p>
+  <p>Start Date: <input type="date" name="start_date" value="2015-05-25" /></p>
+  <p>Status: <select name="status" id="">
+    <option valud="scheduled">Scheduled</option>
+    <option valud="sent">Sent</option>
+  </select></p>
+</form>
+  <p><button id="create-vacation" value="Create" />Create</button>
+
+<hr />
+
+<h3>Vacation List</h3>
+
 {{range .TimesOff}}
 <div>
   <p>Type: {{.Type}}</p>
